@@ -16,3 +16,6 @@ build/
 
 # Logs and database files
 *.log
+
+# Secrets Files
+secrets.toml
