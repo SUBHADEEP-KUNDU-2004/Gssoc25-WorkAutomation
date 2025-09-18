@@ -78,6 +78,34 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+@media (max-width: 480px) {
+    .author-section {
+        text-align: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+    }
+}
+</style>
+
+<div class="author-section" style="
+    flex-shrink:0; 
+    text-align:right; 
+    font-size:17px; 
+    font-weight:500; 
+    color:#06b6d4; 
+    min-width:150px;
+    margin-bottom:-40px;
+    margin-top:-10px;
+">
+    <a href="https://ujjwalsaini.dev" target="_blank" style="color:#06b6d4; text-decoration:none;">
+        Author – Ujjwal Saini
+    </a>
+</div>
+""", unsafe_allow_html=True)
+
+
 # ---------------------------
 # PROJECT SHOWCASE
 # ---------------------------
