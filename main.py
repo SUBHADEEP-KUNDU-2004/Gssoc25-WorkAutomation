@@ -4,13 +4,15 @@ import pandas as pd
 st.set_page_config(page_title="Open Source Project Showcase", layout="wide")
 
 # ---------------------------
-# GOOGLE SHEETS PHASE LINKS
+# GOOGLE SHEETS LINKS
 # ---------------------------
-PHASE_URLS = {
+DATA_URLS = {
     "Phase 1": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=0",
     "Phase 2": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=1798200306",
     "Phase 3": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=1630975934",
-    "Phase 4": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=752947580"
+    "Phase 4": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=752947580",
+    "Mentor Contacts": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=2022886695",
+    "PA Contacts": "https://docs.google.com/spreadsheets/d/12TYRJSwCimT8DIBT4UKKUGR7lrpG2lzTNK82Zc1LwO0/export?format=csv&gid=2101496568"
 }
 
 @st.cache_data
@@ -21,18 +23,15 @@ def load_data(url):
 # HEADER
 # ---------------------------
 st.markdown("""
-<h1 style='color:#06b6d4; font-size:44px; font-weight:800; margin-bottom:5px;'>🚀 GSSoC'25 Project Showcase</h1>
+<h1 style='color:#06b6d4; font-size:44px; font-weight:800; margin-bottom:5px;'>🚀 GSSoC'25 Showcase & Contacts</h1>
 <p style='color:#e0f7fa; font-size:18px; margin-top:0;'>
-Explore innovative student-driven open-source projects from all phases, connect with passionate contributors, and dive into exciting tech stacks.
+Browse projects from all phases, and connect directly with mentors and project admins.
 </p>
 """, unsafe_allow_html=True)
 
-# ---------------------------
-# PHASE SELECTION BUTTONS
-# ---------------------------
-phase = st.radio("📂 Select Project Phase", list(PHASE_URLS.keys()), horizontal=True)
+section = st.radio("📂 Select Section", list(DATA_URLS.keys()), horizontal=True)
 
-df = load_data(PHASE_URLS[phase])
+df = load_data(DATA_URLS[section])
 
 # ---------------------------
 # CUSTOM CSS
@@ -56,71 +55,130 @@ st.markdown("""
         margin-right: 5px;
         display: inline-block;
     }
+    .contact-card {
+        background: rgba(17, 17, 17, 0.6);  /* semi-transparent */
+        backdrop-filter: blur(12px);        /* glassmorphism blur */
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 18px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        transition: all 0.25s ease-in-out;
+    }
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    }
+    .contact-links a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 12px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------
-# SEARCH BAR
+# PROJECT SHOWCASE
 # ---------------------------
-search = st.text_input("🔍 Search projects by name or tech stack")
+if section.startswith("Phase"):
+    search = st.text_input("🔍 Search projects by name or tech stack")
 
-filtered_df = df.copy()
-if search:
-    mask = (
-        df["Project name"].astype(str).str.contains(search, case=False, na=False) |
-        df["Tech stack"].astype(str).str.contains(search, case=False, na=False)
-    )
-    filtered_df = df[mask]
+    filtered_df = df.copy()
+    if search:
+        mask = (
+            df["Project name"].astype(str).str.contains(search, case=False, na=False) |
+            df["Tech stack"].astype(str).str.contains(search, case=False, na=False)
+        )
+        filtered_df = df[mask]
+
+    cols = st.columns(3)
+
+    for idx, row in enumerate(filtered_df.iterrows()):
+        i, project = row
+        with cols[idx % 3]:
+            with st.expander(f"📌 {project['Project name']}"):
+                # Description
+                st.markdown(f"<div class='section-title'>📝 Description</div>", unsafe_allow_html=True)
+                st.write(project['Project description'])
+
+                # Project Link
+                if pd.notna(project['Project link']):
+                    st.markdown(f"🔗 <a href='{project['Project link']}' target='_blank'><b>Visit Project</b></a>", unsafe_allow_html=True)
+
+                # Project Admin
+                st.markdown(f"<div class='section-title'>👨‍💻 Project Admin</div>", unsafe_allow_html=True)
+                st.write(project['Project admin'])
+                admin_links = []
+                if pd.notna(project['Admin linkedin']):
+                    admin_links.append(f"<a href='{project['Admin linkedin']}' target='_blank'>💼 LinkedIn</a>")
+                if pd.notna(project['Admin github']):
+                    admin_links.append(f"<a href='{project['Admin github']}' target='_blank'>🐙 GitHub</a>")
+                if admin_links:
+                    st.markdown(" | ".join(admin_links), unsafe_allow_html=True)
+
+                # Tech Stack
+                if pd.notna(project['Tech stack']):
+                    st.markdown(f"<div class='section-title'>⚙️ Tech Stack</div>", unsafe_allow_html=True)
+                    techs = [f"<span class='tech-stack'>{t.strip()}</span>" for t in project['Tech stack'].split(",")]
+                    st.markdown(" ".join(techs), unsafe_allow_html=True)
+
+                # Mentors
+                mentor_list = []
+                for j in range(1, 6):
+                    mentor = project.get(f"mentor {j}")
+                    if pd.notna(mentor):
+                        links = []
+                        if pd.notna(project.get(f"mentor {j} linkedin")):
+                            links.append(f"<a href='{project[f'mentor {j} linkedin']}' target='_blank'>💼 LinkedIn</a>")
+                        if pd.notna(project.get(f"mentor {j} github")):
+                            links.append(f"<a href='{project[f'mentor {j} github']}' target='_blank'>🐙 GitHub</a>")
+                        mentor_list.append(f"<li><b>{mentor}</b> {' | '.join(links)}</li>")
+
+                if mentor_list:
+                    st.markdown(f"<div class='section-title'>👩‍🏫 Project Mentors</div>", unsafe_allow_html=True)
+                    st.markdown("<ul>" + "".join(mentor_list) + "</ul>", unsafe_allow_html=True)
 
 # ---------------------------
-# SHOW PROJECT CARDS
+# MENTOR CONTACTS
 # ---------------------------
-cols = st.columns(3)
+elif section == "Mentor Contacts":
+    st.markdown("<h2 style='color:#06b6d4;'>👩‍🏫 Mentor Contacts</h2>", unsafe_allow_html=True)
+    cols = st.columns(3)
+    for idx, row in enumerate(df.iterrows()):
+        i, contact = row
+        with cols[idx % 3]:
+            st.markdown(f"""
+            <div class='contact-card'>
+                <h3 style="color:#06b6d4; margin-bottom:5px;">{contact['NAME']}</h3>
+                <span class='tech-stack'>{contact['TECH STACK']}</span><br><br>
+                📧 {contact['EMAIL']}<br>
+                <div class="contact-links" style="margin-top:8px;">
+                    {"<a href='" + contact['GITHUB_url'] + "' target='_blank'>🐙 GitHub</a>" if pd.notna(contact['GITHUB_url']) else ""}
+                    {"<a href='" + contact['LINKEDIN_url'] + "' target='_blank'>💼 LinkedIn</a>" if pd.notna(contact['LINKEDIN_url']) else ""}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
-for idx, row in enumerate(filtered_df.iterrows()):
-    i, project = row
-    with cols[idx % 3]:
-        with st.expander(f"📌 {project['Project name']}"):
-            # Description
-            st.markdown(f"<div class='section-title'>📝 Description</div>", unsafe_allow_html=True)
-            st.write(project['Project description'])
-
-            # Project Link
-            if pd.notna(project['Project link']):
-                st.markdown(f"🔗 <a href='{project['Project link']}' target='_blank'><b>Visit Project</b></a>", unsafe_allow_html=True)
-
-            # Project Admin
-            st.markdown(f"<div class='section-title'>👨‍💻 Project Admin</div>", unsafe_allow_html=True)
-            st.write(project['Project admin'])
-            admin_links = []
-            if pd.notna(project['Admin linkedin']):
-                admin_links.append(f"<a href='{project['Admin linkedin']}' target='_blank'>💼 LinkedIn</a>")
-            if pd.notna(project['Admin github']):
-                admin_links.append(f"<a href='{project['Admin github']}' target='_blank'>🐙 GitHub</a>")
-            if admin_links:
-                st.markdown(" | ".join(admin_links), unsafe_allow_html=True)
-
-            # Tech Stack
-            if pd.notna(project['Tech stack']):
-                st.markdown(f"<div class='section-title'>⚙️ Tech Stack</div>", unsafe_allow_html=True)
-                techs = [f"<span class='tech-stack'>{t.strip()}</span>" for t in project['Tech stack'].split(",")]
-                st.markdown(" ".join(techs), unsafe_allow_html=True)
-
-            # Mentors
-            mentor_list = []
-            for j in range(1, 6):
-                mentor = project.get(f"mentor {j}")
-                if pd.notna(mentor):
-                    links = []
-                    if pd.notna(project.get(f"mentor {j} linkedin")):
-                        links.append(f"<a href='{project[f'mentor {j} linkedin']}' target='_blank'>💼 LinkedIn</a>")
-                    if pd.notna(project.get(f"mentor {j} github")):
-                        links.append(f"<a href='{project[f'mentor {j} github']}' target='_blank'>🐙 GitHub</a>")
-                    mentor_list.append(f"<li><b>{mentor}</b> {' | '.join(links)}</li>")
-
-            if mentor_list:
-                st.markdown(f"<div class='section-title'>👩‍🏫 Project Mentors</div>", unsafe_allow_html=True)
-                st.markdown("<ul>" + "".join(mentor_list) + "</ul>", unsafe_allow_html=True)
+# ---------------------------
+# PA CONTACTS
+# ---------------------------
+elif section == "PA Contacts":
+    st.markdown("<h2 style='color:#06b6d4;'>👨‍💻 Project Admin Contacts</h2>", unsafe_allow_html=True)
+    cols = st.columns(3)
+    for idx, row in enumerate(df.iterrows()):
+        i, contact = row
+        with cols[idx % 3]:
+            st.markdown(f"""
+            <div class='contact-card'>
+                <h3 style="color:#06b6d4; margin-bottom:5px;">{contact['NAME']}</h3>
+                📧 {contact['EMAIL']}<br>
+                <div class="contact-links" style="margin-top:8px;">
+                    {"<a href='" + contact['GITHUB_url'] + "' target='_blank'>🐙 GitHub</a>" if pd.notna(contact['GITHUB_url']) else ""}
+                    {"<a href='" + contact['LINKEDIN_url'] + "' target='_blank'>💼 LinkedIn</a>" if pd.notna(contact['LINKEDIN_url']) else ""}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
 # ---------------------------
 # FOOTER
