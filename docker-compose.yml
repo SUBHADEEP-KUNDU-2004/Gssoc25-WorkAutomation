@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  contributors-point:
+    build:
+      context: .
+    working_dir: /app/Contributors-Point
+    command: streamlit run app.py --server.port=8501
+    volumes:
+      - ./Contributors-Point:/app/Contributors-Point
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+  projects-guide:
+    build:
+      context: .
+    working_dir: /app/Projects-Guide
+    command: streamlit run app.py --server.port=8502
+    volumes:
+      - ./Projects-Guide:/app/Projects-Guide
+    ports:
+      - "8502:8502"
+    restart: unless-stopped
