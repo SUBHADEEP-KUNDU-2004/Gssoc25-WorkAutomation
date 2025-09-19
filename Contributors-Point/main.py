@@ -6,16 +6,13 @@ import re
 from datetime import datetime
 import pandas as pd
 
-# --- Config ---
 st.set_page_config(page_title="GitHub Contributor Points", page_icon="📊", layout="wide")
 
-# --- GitHub Token ---
 GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN")
 if not GITHUB_TOKEN:
     st.error("❌ GitHub token not found! Please add it to Streamlit secrets.")
     st.stop()
 
-# --- App Title ---
 st.title("📊 GitHub Contributors Points Calculator")
 
 # --- Inputs ---
@@ -42,7 +39,6 @@ POINTS_MAP = {
     "level 3": st.number_input("Points for Level 3", value=10, min_value=0),
 }
 
-# --- CSV Upload ---
 st.markdown("## 📥 Upload Contributor Info CSV")
 uploaded_file = st.file_uploader("Upload CSV: (full_name,email,github_url)", type=["csv"])
 
