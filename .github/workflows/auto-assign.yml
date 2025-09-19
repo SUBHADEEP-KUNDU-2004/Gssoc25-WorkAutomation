@@ -1,0 +1,34 @@
+name: 🤝 Auto Assign Issues & PRs
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-assign issue to mentor(s)
+        if: github.event_name == 'issues'
+        uses: pozil/auto-assign-issue@v1
+        with:
+          assignees: |
+            mentor1
+            mentor2
+          numOfAssignees: 1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-assign PR to author & reviewers
+        if: github.event_name == 'pull_request'
+        uses: kentaro-m/auto-assign-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          addAssignees: author
+          reviewers: |
+            mentor1
+            mentor2
+            mentor3
+          numberOfReviewers: 2
+          skipIfAlreadyAssigned: true
