@@ -20,3 +20,31 @@ services:
     ports:
       - "8502:8502"
     restart: unless-stopped
+  auto-thank-contributors:
+    build:
+      context: .
+    working_dir: /app/Auto-Thank-Contributors
+    command: streamlit run main.py --server.port=8503
+    volumes:
+      - ./Auto-Thank Contributors:/app/Auto-Thank-Contributors
+    ports:
+      - "8503:8503"
+    restart: unless-stopped
+  github-tags-generator:
+    build:
+      context: .
+    working_dir: /app/GitHub-Tags-Generator
+    command: streamlit run main.py --server.port=8504
+    volumes:
+      - ./GitHub Tags Generator:/app/GitHub-Tags-Generator
+    ports:
+      - "8504:8504"
+    restart: unless-stopped
+  task-scheduler:
+    build:
+      context: .
+    working_dir: /app/Task-Scheduler
+    command: python "Task Scheduler.py"
+    volumes:
+      - ./Task Scheduler:/app/Task-Scheduler
+    restart: unless-stopped
